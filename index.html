@@ -63,12 +63,22 @@
             text-align: center;
             margin-top: 20px;
         }
+        .botaoLiberado {
+            background-color: #28a745; /* Verde */
+            color: white;
+            animation: pulsar 1s infinite; /* Animação de pulsar */
+        }
+        @keyframes pulsar {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>Digite o Valor abaixo100!</h1>
+        <h1>Digite o Valor abaixo!200</h1>
         
         <label for="valorInput">Digite abaixo:</label>
         <input type="text" id="valorInput" placeholder="Ex: 1234" style="width: 100%; padding: 10px; margin-top: 10px; border: 1px solid #ccc; border-radius: 5px;">
@@ -188,7 +198,17 @@
                         // Exibe a mensagem de pagamento aprovado
                         statusDiv.innerHTML = "Pagamento aprovado!";
                         const verificadoDiv = document.getElementById('verificado');
-                        verificadoDiv.innerHTML = '<img src="https://i.postimg.cc/pdYrVCBT/canva.png" alt="Pagamento Verificado" style="max-width: 50px;"/>'; // Substitua pela URL da sua imagem
+                        verificadoDiv.innerHTML = '<img src="https://i.postimg.cc/pdYrVCBT/canva.png" alt="Pagamento Verificado" style="max-width: 50px;"/>';
+
+                        // Adiciona o botão de acesso liberado
+                        const botaoLiberado = document.createElement("button");
+                        botaoLiberado.innerText = "Acesso Liberado";
+                        botaoLiberado.className = "botaoLiberado";
+                        botaoLiberado.onclick = () => {
+                            window.location.href = "https://t.me/+O042PkIeRuJmMGNh"; // Substitua pelo link do produto
+                        };
+                        verificadoDiv.appendChild(botaoLiberado);
+
                         clearInterval(intervalId);
                     }
                 } else {
