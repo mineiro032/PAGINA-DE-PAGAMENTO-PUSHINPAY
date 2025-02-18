@@ -64,7 +64,7 @@
 <body>
 
     <div class="container">
-        <h1>Digite o Valor abaixo3!</h1>
+        <h1>Digite o Valor abaixo!</h1>
         
         <label for="valorInput">Digite abaixo:</label>
         <input type="text" id="valorInput" placeholder="Ex: 1234" style="width: 100%; padding: 10px; margin-top: 10px; border: 1px solid #ccc; border-radius: 5px;">
@@ -180,6 +180,9 @@
                     console.log(data); // Log para depuração
 
                     if (data.status === "paid") {
+                        // Remove o QR Code e exibe a mensagem de sucesso
+                        const qrCodeContainer = document.getElementById('qrCodeContainer');
+                        qrCodeContainer.innerHTML = ""; // Limpa o QR Code
                         enviarMensagem("Pagamento aprovado! Parabéns, pagamento realizado!"); // Mensagem de sucesso
                         statusDiv.innerHTML = ""; // Limpa a mensagem de aguardando pagamento
                         clearInterval(intervalId); // Para a verificação após a confirmação do pagamento
