@@ -64,10 +64,9 @@
 <body>
 
     <div class="container">
-        <h1>Digite o Valor abaixo!
-        </h1>
+        <h1>Digite o Valor abaixo!</h1>
         
-        <label for="valorInput">digite abaixo:</label>
+        <label for="valorInput">Digite abaixo:</label>
         <input type="text" id="valorInput" placeholder="Ex: 1234" style="width: 100%; padding: 10px; margin-top: 10px; border: 1px solid #ccc; border-radius: 5px;">
         
         <button id="gerarPixBtn">Gerar Pix</button>
@@ -174,6 +173,9 @@
                         enviarMensagem("Pagamento aprovado!");
                         statusDiv.innerHTML = ""; // Limpa a mensagem de aguardando pagamento
                         clearInterval(intervalId); // Para a verificação após a confirmação do pagamento
+
+                        // Redireciona para a página desejada
+                        window.location.href = "url-da-pagina-de-sucesso.html"; // Substitua pelo URL da página de sucesso
                     }
                 } else {
                     enviarMensagem("Erro ao verificar pagamento: " + response.statusText);
