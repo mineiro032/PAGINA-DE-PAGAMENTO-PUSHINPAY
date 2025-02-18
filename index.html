@@ -78,7 +78,7 @@
 <body>
 
     <div class="container">
-        <h1>Digite o Valor abaixo!200</h1>
+        <h1>Digite o Valor abaixo!</h1>
         
         <label for="valorInput">Digite abaixo:</label>
         <input type="text" id="valorInput" placeholder="Ex: 1234" style="width: 100%; padding: 10px; margin-top: 10px; border: 1px solid #ccc; border-radius: 5px;">
@@ -140,6 +140,7 @@
         const apresentarQRCode = (qrCodeBase64) => {
             const imgQrCode = document.createElement("img");
             imgQrCode.src = qrCodeBase64;
+            imgQrCode.style.maxWidth = "300px"; // Aumenta o tamanho da imagem
             const qrCodeContainer = document.getElementById('qrCodeContainer');
             qrCodeContainer.innerHTML = "";
             qrCodeContainer.appendChild(imgQrCode);
@@ -198,7 +199,7 @@
                         // Exibe a mensagem de pagamento aprovado
                         statusDiv.innerHTML = "Pagamento aprovado!";
                         const verificadoDiv = document.getElementById('verificado');
-                        verificadoDiv.innerHTML = '<img src="https://i.postimg.cc/pdYrVCBT/canva.png" alt="Pagamento Verificado" style="max-width: 50px;"/>';
+                        verificadoDiv.innerHTML = '<img src="https://i.postimg.cc/pdYrVCBT/canva.png" alt="Pagamento Verificado" style="max-width: 150px;"/>'; // Aumenta o tamanho da imagem
 
                         // Adiciona o botão de acesso liberado
                         const botaoLiberado = document.createElement("button");
