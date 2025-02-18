@@ -53,29 +53,18 @@
             font-weight: bold;
             color: #28a745; /* Cor verde para sucesso */
             margin-top: 20px;
-            display: none; /* Inicialmente oculto */
-            text-align: center; /* Centraliza o texto */
         }
-        .pago {
-            font-size: 24px;
-            color: #28a745; /* Verde */
-            text-align: center;
+        #codigoPix {
             margin-top: 20px;
-        }
-        .icon {
-            font-size: 40px; /* Tamanho do ícone */
-            vertical-align: middle; /* Alinhamento vertical */
-            margin-right: 10px; /* Espaçamento entre ícone e texto */
-        }
-        .hidden {
-            display: none; /* Classe para ocultar elementos */
+            font-size: 18px;
+            text-align: center; /* Centraliza o texto */
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>Digite o Valor abaixo6!</h1>
+        <h1>Digite o Valor abaixo!</h1>
         
         <label for="valorInput">Digite abaixo:</label>
         <input type="text" id="valorInput" placeholder="Ex: 1234" style="width: 100%; padding: 10px; margin-top: 10px; border: 1px solid #ccc; border-radius: 5px;">
@@ -149,6 +138,26 @@
         const apresentarCodigoCopiaCola = (codigo) => {
             const codigoDiv = document.getElementById('codigoPix');
             codigoDiv.innerHTML = `Segue para pagamento: ${codigo}`;
+            criarBotaoCopiar(codigo);
+        };
+
+        // Ação de Cópia do Código PIX
+        const criarBotaoCopiar = (codigo) => {
+            const botao = document.createElement("button");
+            botao.innerText = "Copiar Código";
+            botao.onclick = () => copiarCodigo(codigo);
+            document.body.appendChild(botao);
+        };
+
+        // Execução do Script de Cópia
+        const copiarCodigo = async (codigo) => {
+            await navigator.clipboard.writeText(codigo);
+            confirmarCopia();
+        };
+
+        // Confirmação de Cópia
+        const confirmarCopia = () => {
+            enviarMensagem("PUSHIN PAY – Código copiado com sucesso!");
         };
 
         // Verifica o status do pagamento
@@ -171,31 +180,8 @@
                     console.log(data); // Log para depuração
 
                     if (data.status === "paid") {
-                        // Remove o QR Code e exibe a mensagem de sucesso
-                        const qrCodeContainer = document.getElementById('qrCodeContainer');
-                        qrCodeContainer.innerHTML = ""; // Limpa o QR Code
-
-                        // Exibe a mensagem de pagamento aprovado
-                        const successMessage = document.createElement("div");
-                        successMessage.className = "pago";
-                        successMessage.innerHTML = `<span class="icon">✔️</span>Pagamento aprovado! Parabéns, pagamento realizado!`;
-                        document.querySelector('.container').appendChild(successMessage);
-
-                        // Remove todos os outros elementos
-                        document.getElementById('gerarPixBtn').classList.add('hidden');
-                        document.getElementById('valorInput').classList.add('hidden');
-                        document.getElementById('mensagem').classList.add('hidden');
-                        document.getElementById('codigoPix').classList.add('hidden');
+                        enviarMensagem("Pagamento aprovado! Parabéns, pagamento realizado!"); // Mensagem de sucesso
                         statusDiv.innerHTML = ""; // Limpa a mensagem de aguardando pagamento
-
-                        // Adiciona o botão "Acesso liberado"
-                        const acessoLiberadoBtn = document.createElement("button");
-                        acessoLiberadoBtn.innerText = "Acesso Liberado";
-                        acessoLiberadoBtn.onclick = () => {
-                            alert("Acesso liberado!"); // Ação do botão
-                        };
-                        document.querySelector('.container').appendChild(acessoLiberadoBtn);
-
                         clearInterval(intervalId); // Para a verificação após a confirmação do pagamento
                     }
                 } else {
