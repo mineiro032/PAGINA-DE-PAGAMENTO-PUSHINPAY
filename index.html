@@ -78,7 +78,7 @@
 <body>
 
     <div class="container">
-        <h1>Digite o Valor abaixo300!</h1>
+        <h1>Digite o Valor abaixo!</h1>
         
         <label for="valorInput">Digite abaixo:</label>
         <input type="text" id="valorInput" placeholder="Ex: 1234" style="width: 100%; padding: 10px; margin-top: 10px; border: 1px solid #ccc; border-radius: 5px;">
@@ -149,23 +149,7 @@
         const apresentarCodigoCopiaCola = (codigo) => {
             const codigoDiv = document.getElementById('codigoPix');
             codigoDiv.innerHTML = `Segue para pagamento: ${codigo}`;
-            criarBotaoCopiar(codigo);
-        };
-
-        const criarBotaoCopiar = (codigo) => {
-            const botao = document.createElement("button");
-            botao.innerText = "Copiar Código";
-            botao.onclick = () => copiarCodigo(codigo);
-            document.body.appendChild(botao);
-        };
-
-        const copiarCodigo = async (codigo) => {
-            await navigator.clipboard.writeText(codigo);
-            confirmarCopia();
-        };
-
-        const confirmarCopia = () => {
-            enviarMensagem("PUSHIN PAY – Código copiado com sucesso!");
+            // Remove a criação do botão de copiar código
         };
 
         const verificarPagamento = (idTransacao) => {
@@ -199,7 +183,7 @@
                         // Exibe a mensagem de pagamento aprovado
                         statusDiv.innerHTML = "Pagamento aprovado!";
                         const verificadoDiv = document.getElementById('verificado');
-                        verificadoDiv.innerHTML = '<img src="https://i.postimg.cc/pdYrVCBT/canva.png" alt="Pagamento Verificado" style="max-width: 150px;"/>'; // Aumenta o tamanho da imagem
+                        verificadoDiv.innerHTML = '<img src="https://i.postimg.cc/pdYrVCBT/canva.png" alt="Pagamento Verificado" style="max-width: 150px;"/>';
 
                         // Adiciona o botão de acesso liberado
                         const botaoLiberado = document.createElement("button");
