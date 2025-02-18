@@ -59,12 +59,19 @@
             font-size: 18px;
             text-align: center;
         }
+        #verificado {
+            color: #28a745; /* Verde para o verificado */
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>Digite o Valor abaixo8!</h1>
+        <h1>Digite o Valor abaixo99!</h1>
         
         <label for="valorInput">Digite abaixo:</label>
         <input type="text" id="valorInput" placeholder="Ex: 1234" style="width: 100%; padding: 10px; margin-top: 10px; border: 1px solid #ccc; border-radius: 5px;">
@@ -75,6 +82,7 @@
         <div id="codigoPix"></div>
         <div id="qrCodeContainer"></div>
         <div id="statusPagamento"></div>
+        <div id="verificado"></div> <!-- Div para verificar pagamento -->
     </div>
 
     <script>
@@ -172,9 +180,18 @@
 
                     if (data.status === "paid") {
                         const qrCodeContainer = document.getElementById('qrCodeContainer');
-                        qrCodeContainer.innerHTML = ""; // Remove o QR Code
-                        statusDiv.innerHTML = "Pagamento aprovado!"; // Atualiza a mensagem de status
-                        enviarMensagem("Parabéns, pagamento realizado!"); // Mensagem de sucesso
+                        const codigoDiv = document.getElementById('codigoPix');
+                        const mensagemDiv = document.getElementById('mensagem');
+
+                        // Remove todas as informações de pagamento
+                        qrCodeContainer.innerHTML = "";
+                        codigoDiv.innerHTML = "";
+                        mensagemDiv.innerHTML = "";
+
+                        // Exibe a mensagem de pagamento aprovado
+                        statusDiv.innerHTML = "Pagamento aprovado!";
+                        const verificadoDiv = document.getElementById('verificado');
+                        verificadoDiv.innerHTML = "✔️"; // Ícone de verificado
                         clearInterval(intervalId);
                     }
                 } else {
