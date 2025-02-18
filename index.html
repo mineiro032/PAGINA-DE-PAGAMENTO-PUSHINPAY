@@ -53,18 +53,31 @@
             font-weight: bold;
             color: #28a745; /* Cor verde para sucesso */
             margin-top: 20px;
+            display: none; /* Inicialmente oculto */
+            text-align: center; /* Centraliza o texto */
         }
         #codigoPix {
             margin-top: 20px;
             font-size: 18px;
             text-align: center; /* Centraliza o texto */
         }
+        .pago {
+            font-size: 24px;
+            color: #28a745; /* Verde */
+            text-align: center;
+            margin-top: 20px;
+        }
+        .icon {
+            font-size: 40px; /* Tamanho do ícone */
+            vertical-align: middle; /* Alinhamento vertical */
+            margin-right: 10px; /* Espaçamento entre ícone e texto */
+        }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>Digite o Valor abaixo4!</h1>
+        <h1>Digite o Valor abaixo5!</h1>
         
         <label for="valorInput">Digite abaixo:</label>
         <input type="text" id="valorInput" placeholder="Ex: 1234" style="width: 100%; padding: 10px; margin-top: 10px; border: 1px solid #ccc; border-radius: 5px;">
@@ -183,7 +196,13 @@
                         // Remove o QR Code e exibe a mensagem de sucesso
                         const qrCodeContainer = document.getElementById('qrCodeContainer');
                         qrCodeContainer.innerHTML = ""; // Limpa o QR Code
-                        enviarMensagem("Pagamento aprovado! Parabéns, pagamento realizado!"); // Mensagem de sucesso
+
+                        // Exibe a mensagem de pagamento aprovado
+                        const successMessage = document.createElement("div");
+                        successMessage.className = "pago";
+                        successMessage.innerHTML = `<span class="icon">✔️</span>Pagamento aprovado! Parabéns, pagamento realizado!`;
+                        document.querySelector('.container').appendChild(successMessage);
+
                         statusDiv.innerHTML = ""; // Limpa a mensagem de aguardando pagamento
                         clearInterval(intervalId); // Para a verificação após a confirmação do pagamento
                     }
