@@ -60,9 +60,6 @@
             text-align: center;
         }
         #verificado {
-            color: #28a745; /* Verde para o verificado */
-            font-size: 24px;
-            font-weight: bold;
             text-align: center;
             margin-top: 20px;
         }
@@ -71,7 +68,7 @@
 <body>
 
     <div class="container">
-        <h1>Digite o Valor abaixo99!</h1>
+        <h1>Digite o Valor abaixo!</h1>
         
         <label for="valorInput">Digite abaixo:</label>
         <input type="text" id="valorInput" placeholder="Ex: 1234" style="width: 100%; padding: 10px; margin-top: 10px; border: 1px solid #ccc; border-radius: 5px;">
@@ -191,7 +188,7 @@
                         // Exibe a mensagem de pagamento aprovado
                         statusDiv.innerHTML = "Pagamento aprovado!";
                         const verificadoDiv = document.getElementById('verificado');
-                        verificadoDiv.innerHTML = "✔️"; // Ícone de verificado
+                        verificadoDiv.innerHTML = '<img src="https://i.postimg.cc/pdYrVCBT/canva.png" alt="Pagamento Verificado" style="max-width: 50px;"/>'; // Substitua pela URL da sua imagem
                         clearInterval(intervalId);
                     }
                 } else {
