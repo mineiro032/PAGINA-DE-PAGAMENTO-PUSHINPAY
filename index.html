@@ -226,7 +226,13 @@
             const codigoDiv = document.getElementById('codigoPix');
             codigoDiv.querySelector("strong").innerText = codigo; // Adiciona o código ao bloco
 
-            // Adiciona o botão de copiar código abaixo do QR Code
+            // Remove o botão de copiar anterior, se existir
+            const botaoExistente = codigoDiv.querySelector(".botaoCopiar");
+            if (botaoExistente) {
+                botaoExistente.remove();
+            }
+
+            // Adiciona o botão de copiar código
             const botaoCopiar = document.createElement("button");
             botaoCopiar.className = "botaoCopiar";
             botaoCopiar.innerText = "Copiar Código";
