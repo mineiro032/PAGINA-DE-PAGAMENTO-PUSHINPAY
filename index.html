@@ -68,6 +68,19 @@
             color: white;
             animation: pulsar 1s infinite; /* Animação de pulsar */
         }
+        .botaoCopiar {
+            background-color: #28a745; /* Verde */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        .botaoCopiar:hover {
+            background-color: #218838; /* Cor mais escura ao passar o mouse */
+        }
         @keyframes pulsar {
             0% { transform: scale(1); }
             50% { transform: scale(1.05); }
@@ -86,8 +99,8 @@
         <button id="gerarPixBtn">Gerar Pix</button>
         
         <div id="mensagem"></div>
-        <div id="codigoPix"></div>
         <div id="qrCodeContainer"></div>
+        <div id="codigoPix"></div>
         <div id="statusPagamento"></div>
         <div id="verificado"></div> <!-- Div para verificar pagamento -->
     </div>
@@ -148,8 +161,21 @@
 
         const apresentarCodigoCopiaCola = (codigo) => {
             const codigoDiv = document.getElementById('codigoPix');
-            codigoDiv.innerHTML = `Segue para pagamento: ${codigo}`;
-            // Remove a criação do botão de copiar código
+            codigoDiv.innerHTML = `Segue para pagamento: <strong>${codigo}</strong>`;
+
+            // Adiciona o botão de copiar código abaixo do QR Code
+            const botaoCopiar = document.createElement("button");
+            botaoCopiar.className = "botaoCopiar";
+            botaoCopiar.innerText = "Copiar Código";
+            botaoCopiar.onclick = () => {
+                copiarCodigo(codigo);
+            };
+            codigoDiv.appendChild(botaoCopiar);
+        };
+
+        const copiarCodigo = async (codigo) => {
+            await navigator.clipboard.writeText(codigo);
+            enviarMensagem("PUSHIN PAY – Código copiado com sucesso!");
         };
 
         const verificarPagamento = (idTransacao) => {
@@ -177,7 +203,6 @@
 
                         // Remove todas as informações de pagamento
                         qrCodeContainer.innerHTML = "";
-                        codigoDiv.innerHTML = "";
                         mensagemDiv.innerHTML = "";
 
                         // Exibe a mensagem de pagamento aprovado
@@ -185,6 +210,9 @@
                         const verificadoDiv = document.getElementById('verificado');
                         verificadoDiv.innerHTML = '<img src="https://i.postimg.cc/pdYrVCBT/canva.png" alt="Pagamento Verificado" style="max-width: 150px;"/>';
 
+                        // Remover o código PIX e o botão de copiar
+                        codigoDiv.innerHTML = ""; // Remove o código PIX
+                        
                         // Adiciona o botão de acesso liberado
                         const botaoLiberado = document.createElement("button");
                         botaoLiberado.innerText = "Acesso Liberado";
