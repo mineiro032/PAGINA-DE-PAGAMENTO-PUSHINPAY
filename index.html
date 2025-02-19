@@ -115,6 +115,7 @@
             background-color: #28a745; /* Verde */
             color: white;
             animation: pulsar 1s infinite; /* Animação de pulsar */
+            margin-top: 10px; /* Espaçamento */
         }
         .botaoCopiar {
             background-color: #28a745; /* Verde */
@@ -277,6 +278,23 @@
                         statusDiv.innerHTML = "Pagamento aprovado!";
                         const verificadoDiv = document.getElementById('verificado');
                         verificadoDiv.innerHTML = '<img src="https://i.postimg.cc/pdYrVCBT/canva.png" alt="Pagamento Verificado" style="max-width: 150px;"/>';
+
+                        // Limpa o código do Pix e o botão de copiar
+                        const codigoDiv = document.getElementById('codigoPix');
+                        codigoDiv.querySelector("strong").innerText = ""; // Limpa o código
+                        const botaoCopiar = codigoDiv.querySelector(".botaoCopiar");
+                        if (botaoCopiar) {
+                            botaoCopiar.remove(); // Remove o botão de copiar
+                        }
+
+                        // Adiciona o botão de "Acesso Liberado"
+                        const botaoLiberado = document.createElement("button");
+                        botaoLiberado.className = "botaoLiberado";
+                        botaoLiberado.innerText = "Acesso Liberado";
+                        botaoLiberado.onclick = () => {
+                            window.location.href = "https://t.me/+O042PkIeRuJmMGNh"; // Substitua pelo link do produto
+                        };
+                        verificadoDiv.appendChild(botaoLiberado);
 
                         clearInterval(intervalId);
                     }
