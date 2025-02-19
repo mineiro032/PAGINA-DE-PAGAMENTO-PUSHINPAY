@@ -60,6 +60,17 @@
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
+        .codigo-container {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f8f9fa; /* Cor de fundo clara para o bloco */
+            border: 1px solid #ccc; /* Borda cinza */
+            border-radius: 5px; /* Bordas arredondadas */
+            text-align: center; /* Centraliza o texto */
+            word-wrap: break-word; /* Quebra palavras longas */
+            overflow-wrap: break-word; /* Quebra palavras longas */
+            max-width: 100%; /* Garante que o bloco não ultrapasse o contêiner */
+        }
         img {
             max-width: 100%;
             height: auto;
@@ -94,7 +105,6 @@
         #codigoPix {
             margin-top: 20px;
             font-size: 18px;
-            text-align: center;
             color: #333; /* Texto escuro */
         }
         #verificado {
@@ -149,7 +159,11 @@
         
         <div id="mensagem"></div>
         <div id="qrCodeContainer"></div>
-        <div id="codigoPix"></div>
+        
+        <div class="codigo-container" id="codigoPix">
+            <span>Segue para pagamento: <strong></strong></span>
+        </div>
+
         <div id="statusPagamento"></div>
         <div id="verificado"></div> <!-- Div para verificar pagamento -->
     </div>
@@ -210,7 +224,7 @@
 
         const apresentarCodigoCopiaCola = (codigo) => {
             const codigoDiv = document.getElementById('codigoPix');
-            codigoDiv.innerHTML = `Segue para pagamento: <strong>${codigo}</strong>`;
+            codigoDiv.querySelector("strong").innerText = codigo; // Adiciona o código ao bloco
 
             // Adiciona o botão de copiar código abaixo do QR Code
             const botaoCopiar = document.createElement("button");
@@ -247,7 +261,6 @@
 
                     if (data.status === "paid") {
                         const qrCodeContainer = document.getElementById('qrCodeContainer');
-                        const codigoDiv = document.getElementById('codigoPix');
                         const mensagemDiv = document.getElementById('mensagem');
 
                         // Remove todas as informações de pagamento
@@ -258,18 +271,6 @@
                         statusDiv.innerHTML = "Pagamento aprovado!";
                         const verificadoDiv = document.getElementById('verificado');
                         verificadoDiv.innerHTML = '<img src="https://i.postimg.cc/pdYrVCBT/canva.png" alt="Pagamento Verificado" style="max-width: 150px;"/>';
-
-                        // Remover o código PIX e o botão de copiar
-                        codigoDiv.innerHTML = ""; // Remove o código PIX
-                        
-                        // Adiciona o botão de acesso liberado
-                        const botaoLiberado = document.createElement("button");
-                        botaoLiberado.innerText = "Acesso Liberado";
-                        botaoLiberado.className = "botaoLiberado";
-                        botaoLiberado.onclick = () => {
-                            window.location.href = "https://t.me/+O042PkIeRuJmMGNh"; // Substitua pelo link do produto
-                        };
-                        verificadoDiv.appendChild(botaoLiberado);
 
                         clearInterval(intervalId);
                     }
