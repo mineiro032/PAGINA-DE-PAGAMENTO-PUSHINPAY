@@ -37,8 +37,14 @@
             height: 50px; /* Tamanho da logo */
         }
         h1 {
-            color: #ffffff; /* Texto branco */
+            color: #ffffff; /* Texto branco para o nome do usuário */
             margin: 0; /* Remove margem padrão */
+        }
+        .valor-title {
+            color: #000000; /* Texto preto para "Digite o Valor abaixo! ofc" */
+            margin: 0;
+            margin-top: 20px; /* Espaço acima do título */
+            text-align: center; /* Centraliza o texto */
         }
         .container {
             max-width: 600px;
@@ -119,7 +125,7 @@
     <div class="header">
         <div class="profile">
             <img src="https://i.postimg.cc/jS1zpSYK/3175820189543839097-52459661230.jpg" alt="Foto de Perfil">
-            <h1>Meu Perfil</h1>
+            <h1>Leticia C</h1>
         </div>
         <div class="logo">
             <img src="https://i.postimg.cc/vBbDjJTb/Telegram-logo-svg-1.webp" alt="Logo">
@@ -127,10 +133,10 @@
     </div>
 
     <div class="container">
-        <h1>Digite o Valor abaixo! ofc</h1>
+        <h1 class="valor-title">Realize o pagamento via PIX de forma rápida e segura.</h1>
         
         <label for="valorInput">Digite abaixo:</label>
-        <input type="text" id="valorInput" placeholder="Ex: 1234" style="width: 100%; padding: 10px; margin-top: 10px; border: 1px solid #ccc; border-radius: 5px;">
+        <input type="text" id="valorInput" placeholder="Digite o Valor" style="width: 100%; padding: 10px; margin-top: 10px; border: 1px solid #ccc; border-radius: 5px;">
         
         <button id="gerarPixBtn">Gerar Pix</button>
         
