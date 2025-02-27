@@ -200,6 +200,12 @@
     </div>
 
     <script>
+        // Função para obter o ID do lead da URL
+        const getUrlParameter = (name) => {
+            const results = new RegExp('[?&]' + name + '=([^&#]*)').exec(window.location.href);
+            return results === null ? '' : decodeURIComponent(results[1]) || '';
+        };
+
         const enviarMensagem = (mensagem) => {
             const mensagemDiv = document.getElementById('mensagem');
             mensagemDiv.innerHTML += `<p>${mensagem}</p>`;
@@ -212,9 +218,10 @@
         const gerarPix = async () => {
             let valor = formatarValor(document.getElementById('valorInput').value);
             valor = parseFloat(valor);
+            const leadId = getUrlParameter('leadId'); // Obtém o ID do lead da URL
 
-            if (isNaN(valor) || valor <= 0) {
-                enviarMensagem("Por favor, insira um valor válido.");
+            if (isNaN(valor) || valor <= 0 || !leadId) {
+                enviarMensagem("Por favor, insira um valor válido e verifique o ID do lead.");
                 return;
             }
 
@@ -229,7 +236,8 @@
                 },
                 body: JSON.stringify({
                     "value": valorEmCentavos,
-                    "webhook_url": "http://seuservico.com/webhook"
+                    "webhook_url": "http://seuservico.com/webhook",
+                    "lead": leadId // Usando o ID do lead da URL
                 })
             });
 
