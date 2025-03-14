@@ -107,6 +107,29 @@
             color: #999;
         }
 
+        .valores-predefinidos {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .valores-predefinidos button {
+            background-color: var(--primary-color); /* Cor azul */
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: var(--transition);
+            flex: 1;
+            margin: 0 5px;
+        }
+
+        .valores-predefinidos button:hover {
+            background-color: #2980b9; /* Cor azul mais escura ao passar o mouse */
+        }
+
         button {
             padding: 15px;
             background-color: var(--primary-color);
@@ -288,7 +311,15 @@
         
         <div class="input-group">
             <i class="fas fa-money-bill-wave"></i>
-            <input type="text" id="valorInput" placeholder="Digite o valor em R$" autocomplete="off">
+            <input type="number" id="valorInput" placeholder="Digite o valor em R$" min="5" step="0.01" autocomplete="off" inputmode="numeric" pattern="[0-9]*">
+        </div>
+
+        <div class="valores-predefinidos">
+            <button onclick="setValor(9)">R$ 9,00</button>
+            <button onclick="setValor(20)">R$ 20,00</button>
+            <button onclick="setValor(30)">R$ 30,00</button>
+            <button onclick="setValor(50)">R$ 50,00</button>
+            <button onclick="setValor(150)">R$ 150,00</button>
         </div>
         
         <button id="gerarPixBtn">
@@ -342,12 +373,16 @@
             return valor.replace(',', '.').replace(/[^\d.]/g, '');
         };
 
+        const setValor = (valor) => {
+            document.getElementById('valorInput').value = valor.toFixed(2);
+        };
+
         const gerarPix = async () => {
             let valor = formatarValor(document.getElementById('valorInput').value);
             valor = parseFloat(valor);
 
-            if (isNaN(valor) || valor <= 0) {
-                enviarMensagem("Por favor, insira um valor válido.");
+            if (isNaN(valor) || valor < 5) {
+                enviarMensagem("Por favor, insira um valor válido de R$ 5,00 ou mais.");
                 return;
             }
 
