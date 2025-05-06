@@ -311,7 +311,7 @@
         
         <div class="input-group">
             <i class="fas fa-money-bill-wave"></i>
-            <input type="number" id="valorInput" placeholder="Digite o valor em R$" min="5" step="0.01" autocomplete="off" inputmode="numeric" pattern="[0-9]*">
+            <input type="number" id="valorInput" placeholder="Digite o valor em R$" min="2" step="0.01" autocomplete="off" inputmode="numeric" pattern="[0-9]*">
         </div>
 
         <div class="valores-predefinidos">
@@ -377,8 +377,8 @@
             let valor = formatarValor(document.getElementById('valorInput').value);
             valor = parseFloat(valor);
 
-            if (isNaN(valor) || valor < 5) {
-                enviarMensagem("Por favor, insira um valor válido de R$ 5,00 ou mais.");
+            if (isNaN(valor) || valor < 2) {
+                enviarMensagem("Por favor, insira um valor válido de R$ 2,00 ou mais.");
                 return;
             }
 
