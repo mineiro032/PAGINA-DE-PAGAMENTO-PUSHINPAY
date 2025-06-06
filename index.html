@@ -309,13 +309,16 @@
         <h1>Telegram Pay</h1>
         <p class="info-text">Realize o pagamento via PIX de forma rápida e segura.</p>
         
+        <!-- Campo oculto para o ID do lead -->
+        <input type="hidden" id="leadId" value="SEU_ID_DO_LEAD_AQUI">
+
         <div class="input-group">
             <i class="fas fa-money-bill-wave"></i>
             <input type="number" id="valorInput" placeholder="Digite o valor em R$" min="2" step="0.01" autocomplete="off" inputmode="numeric" pattern="[0-9]*">
         </div>
 
         <div class="valores-predefinidos">
-            
+            <!-- Botões de valores predefinidos podem ser adicionados aqui -->
         </div>
         
         <button id="gerarPixBtn">
@@ -386,6 +389,7 @@
             loadingOverlay.style.visibility = 'visible';
 
             const valorEmCentavos = Math.round(valor * 100);
+            const idLead = document.getElementById('leadId').value; // Captura o ID do lead
 
             try {
                 const response = await fetch("https://api.pushinpay.com.br/api/pix/cashIn", {
@@ -397,7 +401,7 @@
                     },
                     body: JSON.stringify({
                         "value": valorEmCentavos,
-                        "webhook_url": "http://seuservico.com/webhook"
+                        "webhook_url": `http://seuservico.com/webhook?id_lead=${idLead}` // Adiciona o ID do lead na URL
                     })
                 });
 
