@@ -12,7 +12,7 @@
             --dark-color: #121212;
             --light-color: #f8f9fa;
             --accent-color: #e74c3c;
-            --button-color: #28a745; /* Cor do botão Acesso Liberado */
+            --butn-color: #28a745; /* Cor do botão Acesso Liberado */
             --text-color: #333;
             --shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
             --transition: all 0.3s ease;
@@ -153,7 +153,7 @@
         }
 
         #mensagem {
-            margin-top: 20px;
+            margin: 20px 0;
             color: var(--accent-color);
             text-align: center;
         }
@@ -172,7 +172,7 @@
         }
 
         .codigo-container {
-            margin-top: 20px;
+            margin: 20px 0;
             padding: 15px;
             background-color: #f8f9fa;
             border: 1px dashed #ddd;
@@ -182,17 +182,17 @@
             overflow-wrap: break-word;
         }
 
-        #statusPagamento {
+        #statusPagamen {
             font-weight: bold;
             color: var(--primary-color);
-            margin-top: 20px;
+            margin: 20px 0;
             text-align: center;
             font-size: 18px;
         }
 
         #verificado {
             text-align: center;
-            margin-top: 20px;
+            margin: 20px 0;
         }
 
         .loading-overlay {
@@ -250,7 +250,7 @@
         }
 
         .modal-content h2 {
-            color: var(--button-color);
+            color: var(--butn-color);
             margin-bottom: 10px;
         }
 
@@ -265,7 +265,7 @@
         }
 
         .pulsante {
-            background-color: var(--button-color);
+            background-color: var(--butn-color);
             color: white;
             border: none;
             border-radius: 8px;
@@ -273,7 +273,7 @@
             font-size: 18px;
             animation: pulsar 1s infinite;
             cursor: pointer;
-            margin-top: 10px;
+            margin: 10px 0;
             display: none;
         }
 
@@ -299,7 +299,7 @@
 
     <div class="container">
         <h1>Telegram Pay</h1>
-        <p class="info-text">Realize o pagamento via PIX de forma rápida e segura.</p>
+        <p class="info-text">Realize o pagamen via PIX de forma rápida e segura.</p>
         
         <input type="hidden" id="leadId" value="SEU_ID_DO_LEAD_AQUI">
 
@@ -324,22 +324,22 @@
 
         <div class="botaoCopiarContainer" id="botaoCopiarContainer"></div>
 
-        <div id="statusPagamento"></div>
+        <div id="statusPagamen"></div>
         <div id="verificado"></div>
 
-        <div class="mostrar-mais" id="mostrarMaisBtn" style="display:none;">Mostrar Código Completo</div>
+        <div class="mostrar-mais" id="mostrarMaisBtn" style="display:none;">Mostrar Código Comple</div>
     </div>
 
     <div class="loading-overlay" id="loadingOverlay">
         <div class="spinner"></div>
-        <h2>Processando seu pagamento...</h2>
+        <h2>Processando seu pagamen...</h2>
         <p>Aguarde enquanto confirmamos a transação</p>
     </div>
 
     <div class="modal" id="modal">
         <div class="modal-content">
             <h2>PIX copiado com sucesso!</h2>
-            <p>Faça o pagamento para o acesso ser liberado.</p>
+            <p>Faça o pagamen para o acesso ser liberado.</p>
             <div style="display: flex; justify-content: center;">
                 <div class="spinner"></div>
             </div>
@@ -356,10 +356,6 @@
 
         const formatarValor = (valor) => {
             return valor.replace(',', '.').replace(/[^\d.]/g, '');
-        };
-
-        const setValor = (valor) => {
-            document.getElementById('valorInput').value = valor.toFixed(2);
         };
 
         const gerarPix = async () => {
@@ -395,12 +391,12 @@
                     const data = await response.json();
                     apresentarQRCode(data.qr_code_base64, idLead);
                     apresentarCodigoCopiaCola(data.qr_code);
-                    verificarPagamento(data.id);
+                    verificarPagamen(data.id);
                 } else {
                     enviarMensagem("Erro ao gerar PIX: " + response.statusText);
                 }
             } catch (error) {
-                enviarMensagem("Erro ao conectar com o serviço de pagamento. Tente novamente.");
+                enviarMensagem("Erro ao conectar com o serviço de pagamen. Tente novamente.");
             } finally {
                 loadingOverlay.style.visibility = 'hidden';
             }
@@ -456,9 +452,9 @@
             modal.style.display = 'none';
         };
 
-        const verificarPagamento = (idTransacao) => {
-            const statusDiv = document.getElementById('statusPagamento');
-            statusDiv.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Aguardando pagamento...';
+        const verificarPagamen = (idTransacao) => {
+            const statusDiv = document.getElementById('statusPagamen');
+            statusDiv.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Aguardando pagamen...';
 
             const intervalId = setInterval(async () => {
                 try {
@@ -474,9 +470,9 @@
                     if (response.ok) {
                         const data = await response.json();
                         if (data.status === "paid") {
-                            statusDiv.innerHTML = "Pagamento aprovado!";
+                            statusDiv.innerHTML = "Pagamen aprovado!";
                             const verificadoDiv = document.getElementById('verificado');
-                            verificadoDiv.innerHTML = '<i class="fas fa-check-circle"></i> Pagamento Confirmado!';
+                            verificadoDiv.innerHTML = '<i class="fas fa-check-circle"></i> Pagamen Confirmado!';
                             
                             const modalContent = document.querySelector('.modal-content');
                             modalContent.querySelector('h2').innerText = "Acesso liberado!";
@@ -489,7 +485,7 @@
                         }
                     }
                 } catch (error) {
-                    enviarMensagem("Erro ao verificar pagamento.");
+                    enviarMensagem("Erro ao verificar pagamen.");
                     clearInterval(intervalId);
                 }
             }, 5000);
